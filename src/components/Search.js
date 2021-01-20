@@ -1,12 +1,23 @@
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 import moment from 'moment'
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 import SearchIcon from '@material-ui/icons/Search';
 import '../css/search.css'
 function Search()
 {
   const [data,setdata]=useState([])
   const [key,setkey]=useState('react')
+  const formatDesc=(text,link)=>
+  {
+    if (text.length>80){
+      return <p>{text.slice(0,87)+"..."} <a href={link} target={"_blank"}  rel="noreferrer">Read more</a></p>
+
+    }
+    else {
+      return <p>{text}</p>
+    }
+  }
   useEffect(()=>
   {
     axios.get(`https://api.github.com/search/repositories?q=%22${key}%22`)
@@ -29,12 +40,20 @@ function Search()
         {
           data.map(item=>
             <div className="search_each_card">
-              <a href={item?.html_url} target={"_blank"}>{item?.full_name}</a>
-              <p>{item?.description}</p>
-              <p>{item?.stargazers_count}</p>
-              <img src={item?.owner?.avatar_url} alt=""/>
-              <p>{item?.owner?.login}</p>
-              <p>Updated at {moment(new Date(item?.updated_at)).format('HH:MM, DD MMMM  YYYY')}  </p>
+              {/*<Scrollbars>*/}
+                <div className="search_name_cont">
+                  <a href={item?.html_url} target={"_blank"}>{item?.full_name}</a>
+                  <span><StarBorderIcon/>{item?.stargazers_count}</span>
+                </div>
+                <div className="item_desc_cont">
+                  {formatDesc(item?.description,item?.html_url)}
+                </div>
+                <div className="item_owner_cont">
+                  <img src={item?.owner?.avatar_url} alt=""/>
+                  <p>{item?.owner?.login}</p>
+                </div>
+                <p className={"item_updated"}>Updated at {moment(new Date(item?.updated_at)).format('HH:MM, DD MMMM  YYYY')}  </p>
+              {/*</Scrollbars>*/}
             </div>
             )
         }

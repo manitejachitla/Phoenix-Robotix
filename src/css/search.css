@@ -2,7 +2,8 @@
     width: 100%;
 }
 .search_main_cont h2{
-    margin-top: 40px;
+    padding-top: 40px;
+    /*margin-top: 40px;*/
     text-align: center;
 }
 
@@ -33,22 +34,93 @@
 }
 
 .search_cards_cont{
-    margin: 20px auto;
-    width: 80%;
+    margin: 20px auto 0;
+    padding-bottom: 60px;
+    width: 90%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 }
 
 .search_each_card{
-    width: 300px;
-    border: 1px solid red;
+    width: 350px;
+    height: 270px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 10px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 8px 8px 14px -2px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 8px 8px 14px -2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 8px 8px 14px -2px rgba(0,0,0,0.2);
     margin: 15px auto;
+    transition: transform 400ms ease-in;
 }
-
+.search_each_card:hover{
+    cursor: pointer;
+    box-shadow: 8px 8px 14px -2px rgba(0,0,0,0.4);
+    -webkit-box-shadow: 8px 8px 14px -2px rgba(0,0,0,0.4);
+    -moz-box-shadow: 8px 8px 14px -2px rgba(0,0,0,0.4);
+    transform: scale(1.03);
+}
 .search_each_card img
 {
     width: 50px;
     height: 50px;
     object-fit: contain;
+}
+
+.search_name_cont{
+    display: flex;
+    width: 90%;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px auto;
+}
+
+.search_name_cont a{
+    text-decoration: none;
+    color: #444444;
+    width: 70%;
+    word-break: break-word;
+}
+.search_name_cont span{
+    display: flex;
+    align-items: center;
+    color: #444444;
+    justify-content: space-between;
+}
+
+.item_desc_cont{
+    margin: 10px 0;
+}
+.item_desc_cont p {
+    color: #444444;
+    line-height: 20px;
+    width: 90%;
+    margin: auto;
+}
+.item_desc_cont p a{
+    color: blue;
+    text-decoration: none;
+}
+.item_desc_cont p a:hover{
+    text-decoration: underline;
+}
+.item_owner_cont{
+    width: 90%;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+}
+.item_updated{
+    width: 90%;
+    margin: 10px auto;
+    color: #444444;
+}
+
+.item_owner_cont p{
+    color: #444444;
+    margin-left: 15px;
 }
