@@ -1,7 +1,6 @@
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 import moment from 'moment'
-import {Scrollbars} from 'react-custom-scrollbars'
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import SearchIcon from '@material-ui/icons/Search';
 import '../css/search.css'
@@ -9,19 +8,24 @@ function Search()
 {
   const [data,setdata]=useState([])
   const [key,setkey]=useState('')
+  const [loading,setloading]=useState(true)
   useEffect(()=>
   {
-    axios.get(`https://api.github.com/search/repositories?q=%22${key}%22`)
-      .then(res=>
-      {
-        console.log(res.data)
-        if(res.data.items.length>0) {
-          setdata(res.data.items)
-        }
-        else {
-
-        }
-      })
+    if (key!==""){
+      setloading(true)
+      axios.get(`https://api.github.com/search/repositories?q=%22${key}%22`)
+        .then(res=>
+        {
+          console.log(res)
+          if(res.data.items.length>0) {
+            setdata(res.data.items)
+            setloading(false)
+          }
+          else {
+            setloading(false)
+          }
+        })
+    }
   },[key])
   return(
     <div className={"search_main_cont"}>
@@ -34,7 +38,12 @@ function Search()
       </div>
       <div className="search_cards_cont">
         {
-          data.length>0 && data.map(item=>
+          loading?
+            <p>loading..</p>
+            :""
+        }
+        {
+          !loading && data.length>0 && data.map(item=>
             <div className="search_each_card">
               {/*<Scrollbars>*/}
                 <div className="search_name_cont">
