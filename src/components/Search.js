@@ -1,6 +1,7 @@
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 import moment from 'moment'
+import {Scrollbars} from 'react-custom-scrollbars'
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import SearchIcon from '@material-ui/icons/Search';
 import '../css/search.css'
@@ -8,23 +9,18 @@ function Search()
 {
   const [data,setdata]=useState([])
   const [key,setkey]=useState('')
-  const formatDesc=(text,link)=>
-  {
-    if (text.length>80){
-      return <p>{text.slice(0,87)+"..."} <a href={link} target={"_blank"}  rel="noreferrer">Read more</a></p>
-
-    }
-    else {
-      return <p>{text}</p>
-    }
-  }
   useEffect(()=>
   {
     axios.get(`https://api.github.com/search/repositories?q=%22${key}%22`)
       .then(res=>
       {
         console.log(res.data)
-        setdata(res.data.items)
+        if(res.data.items.length>0) {
+          setdata(res.data.items)
+        }
+        else {
+
+        }
       })
   },[key])
   return(
@@ -38,15 +34,15 @@ function Search()
       </div>
       <div className="search_cards_cont">
         {
-          data.map(item=>
+          data.length>0 && data.map(item=>
             <div className="search_each_card">
               {/*<Scrollbars>*/}
                 <div className="search_name_cont">
-                  <a href={item?.html_url} target={"_blank"}>{item?.full_name}</a>
+                  <a href={item?.html_url} target={"_blank"} rel="noreferrer">{item?.full_name}</a>
                   <span><StarBorderIcon/>{item?.stargazers_count}</span>
                 </div>
                 <div className="item_desc_cont">
-                  {formatDesc(item?.description,item?.html_url)}
+                  <p>{item?.description}</p>
                 </div>
                 <a href={item?.owner?.url} target={"_blank"}  rel="noreferrer">
                   <div className="item_owner_cont">

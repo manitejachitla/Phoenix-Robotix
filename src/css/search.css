@@ -51,13 +51,14 @@
     justify-content: space-between;
     flex-direction: column;
     padding: 10px;
+    overflow-y: auto;
     background: white;
     border-radius: 12px;
     box-shadow: 8px 8px 14px -2px rgba(0,0,0,0.2);
     -webkit-box-shadow: 8px 8px 14px -2px rgba(0,0,0,0.2);
     -moz-box-shadow: 8px 8px 14px -2px rgba(0,0,0,0.2);
     margin: 15px auto;
-    transition: transform 400ms ease-in;
+    transition: all 400ms ease-in;
 }
 .search_each_card:hover{
     cursor: pointer;
@@ -127,4 +128,21 @@
 .item_owner_cont p{
     color: #444444;
     margin-left: 15px;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    transition: width 400ms ease-in;
+}
+
+::-webkit-scrollbar-track {
+}
+
+::-webkit-scrollbar-thumb {
+    background: darkgray;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: gray;
 }
