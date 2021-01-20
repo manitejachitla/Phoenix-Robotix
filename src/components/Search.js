@@ -36,7 +36,7 @@ function Search()
   },[key])
   return(
     <div className={"search_main_cont"}>
-      <h2>Search Github</h2>
+      <h2>Search Github Repositories</h2>
       <div className="search_input_cont">
         <input type="text" placeholder={"type repository name"} value={key} onChange={e=>setkey(e.target.value)}/>
         <div className="search_btn_cont">
