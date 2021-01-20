@@ -7,5 +7,6 @@
   width: 100%;
   min-height: 100vh;
   font-family: "Helvetica";
-  background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+  background-image: linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%);
+  /*background-image: linear-gradient(to top, #c79081 0%, #dfa579 100%);*/
 }

@@ -19,8 +19,11 @@ function Search()
             console.log(res)
             if(res.data.items.length>0) {
               setdata(res.data.items)
-              setloading(false)
             }
+            else {
+              setdata([])
+            }
+            setloading(false)
           })
           .catch(e=>{
             setloading(false)
@@ -43,7 +46,7 @@ function Search()
       <div className="search_cards_cont">
         {
           loading?
-            <p>loading..</p>
+            <p className={"search_loading"}>Fetching repositories, Please wait...</p>
             :""
         }
         {
