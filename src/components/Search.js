@@ -7,7 +7,7 @@ import '../css/search.css'
 function Search()
 {
   const [data,setdata]=useState([])
-  const [key,setkey]=useState('react')
+  const [key,setkey]=useState('')
   const formatDesc=(text,link)=>
   {
     if (text.length>80){
@@ -48,10 +48,12 @@ function Search()
                 <div className="item_desc_cont">
                   {formatDesc(item?.description,item?.html_url)}
                 </div>
-                <div className="item_owner_cont">
-                  <img src={item?.owner?.avatar_url} alt=""/>
-                  <p>{item?.owner?.login}</p>
-                </div>
+                <a href={item?.owner?.url} target={"_blank"}  rel="noreferrer">
+                  <div className="item_owner_cont">
+                    <img src={item?.owner?.avatar_url} alt=""/>
+                    <p>{item?.owner?.login}</p>
+                  </div>
+                </a>
                 <p className={"item_updated"}>Updated at {moment(new Date(item?.updated_at)).format('HH:MM, DD MMMM  YYYY')}  </p>
               {/*</Scrollbars>*/}
             </div>
