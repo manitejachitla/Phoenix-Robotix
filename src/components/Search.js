@@ -8,30 +8,34 @@ function Search()
 {
   const [data,setdata]=useState([])
   const [key,setkey]=useState('')
-  const [loading,setloading]=useState(true)
+  const [loading,setloading]=useState(false)
   useEffect(()=>
   {
     if (key!==""){
       setloading(true)
-      axios.get(`https://api.github.com/search/repositories?q=%22${key}%22`)
-        .then(res=>
-        {
-          console.log(res)
-          if(res.data.items.length>0) {
-            setdata(res.data.items)
+        axios.get(`https://api.github.com/search/repositories?q=%22${key}%22`)
+          .then(res=>
+          {
+            console.log(res)
+            if(res.data.items.length>0) {
+              setdata(res.data.items)
+              setloading(false)
+            }
+          })
+          .catch(e=>{
             setloading(false)
-          }
-          else {
-            setloading(false)
-          }
-        })
+            if (e.response.status===403){
+              alert(e.response.data.message)
+            }
+            // console.log("error:",e.response)
+          })
     }
   },[key])
   return(
     <div className={"search_main_cont"}>
       <h2>Search Github</h2>
       <div className="search_input_cont">
-        <input type="text" value={key} onChange={e=>setkey(e.target.value)}/>
+        <input type="text" placeholder={"type repository name"} value={key} onChange={e=>setkey(e.target.value)}/>
         <div className="search_btn_cont">
           <SearchIcon/>
         </div>
